@@ -33,10 +33,8 @@ A modern, interactive portfolio website showcasing my academic projects, skills,
 ## 📫 Contact
 
 - **Email:** scmandolikar@gmail.com
-- **Phone:** +91 8600077226
 - **GitHub:** [@scmandolikar](https://github.com/scmandolikar)
-- **LinkedIn:** [Sakshath Mandolikar](https://www.linkedin.com/in/sakshath-mandolikar-8432b8396)
-
+- **LinkedIn:** [Sushant Mandolikar](https://www.linkedin.com/in/sushant-mandolikar-71a519256/)
 ## 📄 License
 
 This project is open source and available under the MIT License.
