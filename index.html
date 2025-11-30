@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakshath Mandolikar | Software Quality Engineer & Python Developer</title>
+    <title>Sakshath Mandolikar | IT Student & Python Developer</title>
     
     <!-- External CSS Libraries -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -24,7 +24,7 @@
             background: #0a0a0a;
         }
         
-        /* Animated Background */
+        /* Animated Background - Faster */
         #animated-bg {
             position: fixed;
             top: 0;
@@ -33,7 +33,7 @@
             height: 100%;
             z-index: -1;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            animation: gradientShift 15s ease infinite;
+            animation: gradientShift 8s ease infinite;
         }
         
         @keyframes gradientShift {
@@ -60,7 +60,7 @@
             border-radius: 20px;
             margin: 2rem;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: fadeInDown 1s ease;
+            animation: fadeInDown 0.6s ease;
         }
         
         @keyframes fadeInDown {
@@ -110,7 +110,7 @@
             background: rgba(100, 181, 246, 0.1);
             border: 1px solid rgba(100, 181, 246, 0.3);
             border-radius: 50px;
-            transition: all 0.3s;
+            transition: all 0.2s;
             font-size: 1rem;
         }
         
@@ -147,198 +147,54 @@
         h2 i {
             color: #64b5f6;
             margin-right: 1rem;
-        
         }
         
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-        }
-        
-        .skill-card {
-            background: rgba(15, 52, 96, 0.4);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(100, 181, 246, 0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .skill-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 50px rgba(100, 181, 246, 0.3);
-            border-color: rgba(100, 181, 246, 0.5);
-        }
-        
-        .skill-card i {
-            font-size: 3rem;
-            color: #64b5f6;
-            margin-bottom: 1rem;
-        }
-        
-        .skill-card h3 {
+        h3 {
             color: #fff;
             font-size: 1.5rem;
             margin: 1rem 0;
         }
         
-        .skill-card p {
-            color: #b0b0b0;
-            font-size: 1rem;
-        }
+        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.8rem}
+        .skill-card{background:rgba(15,52,96,0.4);padding:2rem;border-radius:15px;border:1px solid rgba(100,181,246,0.2);transition:all 0.2s;cursor:pointer}
+        .skill-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 20px 50px rgba(100,181,246,0.3);border-color:rgba(100,181,246,0.5)}
+        .skill-card i{font-size:3rem;color:#64b5f6;margin-bottom:1rem}
+        .skill-card h3{color:#fff;font-size:1.5rem;margin:1rem 0}
+        .skill-card p{color:#b0b0b0;font-size:1rem}
+        .progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:10px;margin-top:1rem;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,#64b5f6,#42a5f5);animation:fillBar 1.5s ease-in-out;transform-origin:left}
+        @keyframes fillBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
         
-        .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            margin-top: 1rem;
-            overflow: hidden;
-        }
+        .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+        .project-card{background:rgba(15,52,96,0.4);border-radius:15px;overflow:hidden;border:1px solid rgba(100,181,246,0.2);transition:all 0.2s;cursor:pointer;text-decoration:none;color:inherit;display:block}
+        .project-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 20px 60px rgba(100,181,246,0.4);border-color:rgba(100,181,246,0.6)}
+        .project-img{width:100%;height:200px;object-fit:cover;transition:transform 0.2s;display:block}
+        .project-card:hover .project-img{transform:scale(1.1)}
+        .project-tag{display:inline-block;background:rgba(100,181,246,0.2);color:#64b5f6;padding:0.5rem 1rem;border-radius:20px;font-size:0.85rem;margin:1rem 1.5rem 0.5rem;font-weight:bold}
+        .project-card h3{color:#fff;font-size:1.6rem;margin:0.5rem 1.5rem}
+        .project-card p{color:#b0b0b0;padding:0.5rem 1.5rem;margin:0.5rem 0;font-size:1rem}
+        .tech-stack{margin-top:1rem;color:#90caf9;font-style:italic;padding:0 1.5rem 1rem}
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #64b5f6, #42a5f5);
-            animation: fillBar 2s ease-in-out;
-        }
-        
-        @keyframes fillBar {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-        
-        .project-card {
-            background: rgba(15, 52, 96, 0.4);
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(100, 181, 246, 0.2);
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 20px 60px rgba(100, 181, 246, 0.4);
-            border-color: rgba(100, 181, 246, 0.6);
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .project-card:hover .project-img {
-            transform: scale(1.1);
-        }
-        
-        .project-tag {
-            display: inline-block;
-            background: rgba(100, 181, 246, 0.2);
-            color: #64b5f6;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin: 1rem 1.5rem 0.5rem;
-            font-weight: bold;
-        }
-        
-        .project-card h3 {
-            color: #fff;
-            font-size: 1.6rem;
-            margin: 0.5rem 1.5rem;
-        }
-        
-        .project-card p {
-            color: #b0b0b0;
-            padding: 0.5rem 1.5rem;
-            margin: 0.5rem 0;
-            font-size: 1rem;
-        }
-        
-        .tech-stack {
-            margin-top: 1rem;
-            color: #90caf9;
-            font-style: italic;
-            padding: 0 1.5rem 1rem;
-        }
-        
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .expertise-item h4 {
-            color: #64b5f6;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .expertise-item h4 i {
-            margin-right: 0.5rem;
-        }
-        
-        .expertise-item p {
-            color: #b0b0b0;
-            font-size: 1rem;
-        }
-        
-        footer {
-            background: rgba(15, 52, 96, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem;
-            text-align: center;
-            border-radius: 20px;
-            margin: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        footer h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        footer p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.8rem; }
-            .subtitle { font-size: 1.2rem; }
-            header { padding: 2rem 1rem; }
-            section { padding: 2rem 1rem; }
-        }
+        .education-item{margin:2rem 0}
+        .expertise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+        .expertise-item h4{color:#64b5f6;margin-bottom:0.5rem;font-size:1.2rem}
+        .expertise-item h4 i{margin-right:0.5rem}
+        .expertise-item p{color:#b0b0b0;font-size:1rem}
+        footer{background:rgba(15,52,96,0.3);backdrop-filter:blur(10px);padding:2.5rem;text-align:center;border-radius:20px;margin:2rem;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+        footer h2{font-size:2rem;margin-bottom:1rem}
+        footer p{font-size:1.1rem;margin-bottom:2rem}
+        @media(max-width:768px){h1{font-size:2rem}h2{font-size:1.8rem}.subtitle{font-size:1.2rem}header{padding:2rem 1rem}section{padding:2rem 1rem}}
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
     <div id="animated-bg"></div>
     <canvas id="particles"></canvas>
     
-    <!-- Header Section -->
     <header data-aos="fade-down">
         <h1>Sakshath Mandolikar</h1>
-        <p class="subtitle">
-            <span id="typed" class="typing-effect"></span>
-        </p>
-        <p>Specializing in software quality assurance, test automation, and secure Python applications with expertise in data analytics and fraud detection systems</p>
-        
-        <div class="contact-info" data-aos="zoom-in" data-aos-delay="100">
+        <p class="subtitle"><span id="typed" class="typing-effect"></span></p>
+        <p>Third Year B.Sc. IT student seeking stipended internships and entry-level opportunities. Skilled in Python development, software testing, and data analytics through academic projects and coursework.</p>
+        <div class="contact-info" data-aos="zoom-in" data-aos-delay="50">
             <a href="mailto:scmandolikar@gmail.com"><i class="fas fa-envelope"></i> Email</a>
             <a href="tel:+918600077226"><i class="fas fa-phone"></i> +91 8600077226</a>
             <a href="https://github.com/scmandolikar" target="_blank"><i class="fab fa-github"></i> GitHub</a>
@@ -346,99 +202,98 @@
         </div>
     </header>
     
-    <!-- Main Container -->
     <div class="container">
-        <!-- About Me Section -->
-        <section class="section" data-aos="fade-up">
+        <section data-aos="fade-up">
             <h2><i class="fas fa-user"></i> About Me</h2>
-            <p>Third-year B.Sc. Information Technology student passionate about software quality assurance, test automation, and building secure applications. With hands-on experience in Python development, I've created multiple projects ranging from encrypted file-sharing systems to automated file management tools. My expertise spans software testing methodologies, data analytics, fraud detection systems, and business intelligence.</p>
-            <p><strong>Currently Exploring:</strong> Data Envelopment Analysis (DEA), Intrusion Detection Systems using CNNs, Predictive Analytics, and Advanced Testing Frameworks</p>
+            <p>I'm a dedicated Third Year B.Sc. Information Technology student currently in my final semester, looking for stipended internships or my first job opportunity. Through my coursework and academic projects, I've developed practical skills in Python programming, software testing methodologies, and data analytics.</p>
+            <p><strong>Currently Learning:</strong> Data Envelopment Analysis (DEA), Intrusion Detection Systems using CNNs, Business Intelligence tools, and Advanced Software Testing techniques</p>
         </section>
         
-        <!-- Core Skills Section -->
-        <section class="section" data-aos="fade-up" data-aos-delay="100">
-            <h2><i class="fas fa-code"></i> Core Skills</h2>
+        <section data-aos="fade-up" data-aos-delay="50">
+            <h2><i class="fas fa-code"></i> Skills from Coursework</h2>
             <div class="skills-grid">
                 <div class="skill-card" data-aos="flip-left">
                     <i class="fas fa-flask"></i>
-                    <h3>🧪 Software Testing & QA</h3>
-                    <p>Comprehensive testing strategies, test automation frameworks, quality assurance methodologies, and ensuring robust applications</p>
+                    <h3>🧪 Software Testing</h3>
+                    <p>Test strategies, manual testing, basic automation concepts, and quality assurance principles learned through coursework</p>
                     <div class="progress-bar"><div class="progress-fill"></div></div>
                 </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="50">
                     <i class="fab fa-python"></i>
                     <h3>🐍 Python Development</h3>
-                    <p>Flask web applications, CustomTkinter GUI development, encryption systems, file management tools, and automation scripts</p>
+                    <p>Flask basics, GUI development with CustomTkinter, file handling, and automation scripts through academic projects</p>
                     <div class="progress-bar"><div class="progress-fill"></div></div>
                 </div>
-                
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="200">
+                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
                     <i class="fas fa-chart-line"></i>
-                    <h3>📊 Data Analytics & ML</h3>
-                    <p>Predictive analytics, fraud detection systems, CNN-based intrusion detection, business intelligence, and data-driven insights</p>
+                    <h3>📊 Data Analytics</h3>
+                    <p>Basic data analysis, working with datasets, visualization concepts, and introduction to machine learning models</p>
                     <div class="progress-bar"><div class="progress-fill"></div></div>
                 </div>
             </div>
         </section>
         
-        <!-- Featured Projects Section -->
-        <section class="section" data-aos="fade-up" data-aos-delay="200">
-            <h2><i class="fas fa-laptop-code"></i> Featured Projects</h2>
+        <section data-aos="fade-up" data-aos-delay="100">
+            <h2><i class="fas fa-laptop-code"></i> Academic Projects</h2>
             <div class="projects-grid">
-                <!-- Project 1: Secure Collab Drive -->
                 <a href="https://github.com/scmandolikar/secure-collab-drive" target="_blank" class="project-card" data-aos="zoom-in">
-                    <img src="https://source.unsplash.com/400x200/coding,security" alt="Secure Collab Drive" class="project-img">
+                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a2e" width="400" height="200"/><path d="M150 60 L200 40 L250 60 L250 120 L200 140 L150 120 Z" fill="#64b5f6" opacity="0.3"/><circle cx="200" cy="90" r="25" fill="#64b5f6" opacity="0.5"/><path d="M200 75 L200 105 M185 90 L215 90" stroke="#fff" stroke-width="3"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Secure File Sharing</text></svg>
                     <span class="project-tag">PYTHON DEVELOPMENT</span>
                     <h3>Secure Collab Drive</h3>
-                    <p>AES-encrypted file-sharing platform built with Python/Flask for secure real-time collaboration with end-to-end encryption and user authentication.</p>
+                    <p>Academic project: AES-encrypted file-sharing platform built with Python/Flask for secure collaboration</p>
                     <p class="tech-stack"><strong>Tech Stack:</strong> Python, Flask, AES Encryption, SQLite</p>
-                    <p class="tech-stack"><strong>Impact:</strong> Enables teams to share files securely without compromising data privacy</p>
                 </a>
                 
-                <!-- Project 2: FileWrangler -->
-                <a href="https://github.com/scmandolikar/FileWrangler" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://source.unsplash.com/400x200/files,organization" alt="FileWrangler" class="project-img">
+                <a href="https://github.com/scmandolikar/FileWrangler" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="50">
+                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#16213e" width="400" height="200"/><rect x="100" y="50" width="80" height="100" rx="5" fill="#64b5f6" opacity="0.3"/><rect x="220" y="50" width="80" height="100" rx="5" fill="#64b5f6" opacity="0.5"/><path d="M180 100 L220 100 M210 90 L220 100 L210 110" stroke="#64b5f6" stroke-width="3" fill="none"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">File Management</text></svg>
                     <span class="project-tag">AUTOMATION TOOL</span>
                     <h3>FileWrangler</h3>
-                    <p>Desktop file management application with modern CustomTkinter UI for bulk file renaming, organization, and automated workflow management.</p>
+                    <p>Course project: Desktop application with CustomTkinter UI for file organization and bulk operations</p>
                     <p class="tech-stack"><strong>Tech Stack:</strong> Python, CustomTkinter, File System APIs</p>
-                    <p class="tech-stack"><strong>Impact:</strong> Streamlined file operations with 80% time savings in manual tasks</p>
                 </a>
                 
-                <!-- Project 3: Social Code Generator -->
-                <a href="https://github.com/scmandolikar/social-code-generator" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://source.unsplash.com/400x200/programming,code" alt="Social Code Generator" class="project-img">
+                <a href="https://github.com/scmandolikar/social-code-generator" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="100">
+                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#0f3460" width="400" height="200"/><rect x="80" y="50" width="240" height="100" rx="5" fill="#64b5f6" opacity="0.2"/><text x="100" y="80" fill="#64b5f6" font-family="monospace" font-size="14">function code() {</text><text x="120" y="100" fill="#90caf9" font-family="monospace" font-size="14">return "Hello";</text><text x="100" y="120" fill="#64b5f6" font-family="monospace" font-size="14">}</text><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Code Generator</text></svg>
                     <span class="project-tag">DEVELOPMENT TOOL</span>
                     <h3>Social Code Generator</h3>
-                    <p>Multilingual code snippet and image generator for creating shareable, visually appealing code presentations for social media and documentation.</p>
+                    <p>Learning project: Code snippet generator for creating shareable code presentations</p>
                     <p class="tech-stack"><strong>Tech Stack:</strong> Python, Image Processing, Syntax Highlighting</p>
-                    <p class="tech-stack"><strong>Impact:</strong> Simplified content creation for developers and technical writers</p>
                 </a>
                 
-                <!-- Project 4: Hand Sign Converter -->
-                <a href="https://github.com/scmandolikar/HandSignConverter" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="https://source.unsplash.com/400x200/ai,technology" alt="Hand Sign Converter" class="project-img">
+                <a href="https://github.com/scmandolikar/HandSignConverter" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="150">
+                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a2e" width="400" height="200"/><path d="M150 120 L150 140 L160 145 L170 140 L170 110" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M170 105 L170 80" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 110 L190 90" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 125 L190 130" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 140 L185 145" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><circle cx="250" cy="100" r="40" fill="none" stroke="#64b5f6" stroke-width="2" opacity="0.5"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Hand Sign Recognition</text></svg>
                     <span class="project-tag">MACHINE LEARNING</span>
                     <h3>Hand Sign to Text Converter</h3>
-                    <p>Real-time Hand Sign to Text Converter built with Python, OpenCV, MediaPipe, and Scikit-learn, featuring a modern GUI and text-to-speech capabilities.</p>
+                    <p>Academic ML project: Real-time hand sign recognition using Python, OpenCV, and MediaPipe</p>
                     <p class="tech-stack"><strong>Tech Stack:</strong> Python, OpenCV, MediaPipe, Scikit-learn</p>
-                    <p class="tech-stack"><strong>Research Focus:</strong> Enhancing accessibility through computer vision and ML</p>
                 </a>
             </div>
         </section>
         
-        <!-- Education Section -->
-        <section class="section" data-aos="fade-up">
+        <section data-aos="fade-up">
             <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-            <h3>B.Sc. Information Technology (TY BSCIT)</h3>
-            <p><strong>Third Year, Semester VI</strong> | Currently Pursuing</p>
-            <p>Focused on Software Testing, Data Envelopment Analysis, Business Intelligence, and Algorithm Design</p>
+            
+            <div class="education-item">
+                <h3>B.Sc. Information Technology (TY BSCIT)</h3>
+                <p><strong>Third Year, Semester VI</strong> | Currently Pursuing (Final Semester)</p>
+                <p>Relevant Coursework: Software Testing, Data Envelopment Analysis, Business Intelligence, Algorithm Design, Database Management, Web Development, Python Programming</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>Higher Secondary Certificate (HSC) - Class 12</h3>
+                <p><strong>Science Stream</strong> | Completed</p>
+                <p>Foundation in Physics, Chemistry, Mathematics, and Computer Science</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>Secondary School Certificate (SSC) - Class 10</h3>
+                <p><strong>General Studies</strong> | Completed</p>
+                <p>Core subjects including Mathematics, Science, and English</p>
+            </div>
         </section>
         
-        <!-- Technical Expertise Section -->
-        <section class="section" data-aos="fade-up">
-            <h2><i class="fas fa-tools"></i> Technical Expertise</h2>
+        <section data-aos="fade-up">
+            <h2><i class="fas fa-tools"></i> Technical Knowledge</h2>
             <div class="expertise-grid">
                 <div class="expertise-item">
                     <h4><i class="fas fa-laptop-code"></i> Programming</h4>
@@ -446,117 +301,45 @@
                 </div>
                 <div class="expertise-item">
                     <h4><i class="fas fa-layer-group"></i> Frameworks</h4>
-                    <p>Flask, CustomTkinter, TensorFlow</p>
+                    <p>Flask, CustomTkinter, TensorFlow (basics)</p>
                 </div>
                 <div class="expertise-item">
-                    <h4><i class="fas fa-toolbox"></i> Tools & Platforms</h4>
-                    <p>Git/GitHub, VS Code, Google Docs</p>
+                    <h4><i class="fas fa-toolbox"></i> Tools</h4>
+                    <p>Git/GitHub, VS Code, Google Workspace</p>
                 </div>
                 <div class="expertise-item">
-                    <h4><i class="fas fa-star"></i> Specializations</h4>
-                    <p>Software Testing, QA, Data Analytics, Cybersecurity</p>
+                    <h4><i class="fas fa-book"></i> Learning Focus</h4>
+                    <p>Software Testing, Data Analytics, Web Development</p>
                 </div>
             </div>
         </section>
     </div>
     
-    <!-- Footer Section -->
     <footer data-aos="fade-up">
         <h2><i class="fas fa-handshake"></i> Let's Connect</h2>
-        <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
-        
+        <p>I'm actively seeking stipended internships and entry-level opportunities. Open to discussing projects, learning opportunities, and career guidance.</p>
         <div class="contact-info">
             <a href="mailto:scmandolikar@gmail.com"><i class="fas fa-envelope"></i> Email</a>
             <a href="https://github.com/scmandolikar" target="_blank"><i class="fab fa-github"></i> GitHub</a>
             <a href="https://www.linkedin.com/in/sakshath-mandolikar-8432b8396" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
-        
-        <p style="margin-top: 2rem; color: #90caf9;">&copy; 2025 Sakshath Mandolikar. Built with passion for quality software.</p>
+        <p style="margin-top:2rem;color:#90caf9">&copy; 2025 Sakshath Mandolikar. Final Year IT Student.</p>
     </footer>
     
-    <!-- External JavaScript Libraries -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    
-    <!-- Custom JavaScript -->
     <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 1000,
-            once: false,
-            mirror: true
-        });
-        
-        // Initialize Typed.js for typing effect
-        var typed = new Typed('#typed', {
-            strings: [
-                'Software Quality Engineer',
-                'Test Automation Expert',
-                'Python Developer',
-                'Data Analyst',
-                'QA Specialist'
-            ],
-            typeSpeed: 50,
-            backSpeed: 30,
-            loop: true,
-            showCursor: true,
-            cursorChar: '|'
-        });
-        
-        // Particle Animation
-        const canvas = document.getElementById('particles');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const particles = [];
-        const particleCount = 50;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 2 + 1;
-            }
-            
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-                
-                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-            }
-            
-            draw() {
-                ctx.fillStyle = 'rgba(100, 181, 246, 0.3)';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-        
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        
+        AOS.init({duration:600,once:false,mirror:true});
+        new Typed('#typed',{strings:['IT Student','Python Developer','Aspiring Software Tester','Data Analytics Learner','Seeking Internships'],typeSpeed:40,backSpeed:25,loop:true,showCursor:true,cursorChar:'|'});
+        const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+        const particles=[],particleCount=50;
+        class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.radius=Math.random()*2+1}
+        update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}
+        draw(){ctx.fillStyle='rgba(100,181,246,0.3)';ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fill()}}
+        for(let i=0;i<particleCount;i++)particles.push(new Particle());
+        function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
         animate();
-        
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
     </script>
 </body>
 </html>
