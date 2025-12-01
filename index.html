@@ -452,7 +452,7 @@
         
         createAudioControl() {
             const button = document.createElement('button');
-            button.innerHTML = '<i class="fas fa-volume-up"></i>';
+            button.innerHTML = '🔊';
             button.style.cssText = `
                 position: fixed;
                 bottom: 30px;
@@ -484,8 +484,8 @@
             button.addEventListener('click', () => {
                 this.enabled = !this.enabled;
                 button.innerHTML = this.enabled ? 
-                    '<i class="fas fa-volume-up"></i>' : 
-                    '<i class="fas fa-volume-mute"></i>';
+                    '🔊' : 
+                    '🔇';
                 
                 if (this.enabled) {
                     if (this.context) {
