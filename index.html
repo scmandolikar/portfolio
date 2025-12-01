@@ -341,5 +341,186 @@
         animate();
         window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
     </script>
+
+    // ===== AUDIO SYSTEM =====
+    const AudioSystem = {
+        context: null,
+        sounds: {},
+        bgMusic: null,
+        enabled: true,
+        
+        init() {
+            // Create audio context on first user interaction
+            document.addEventListener('click', () => {
+                if (!this.context) {
+                    this.context = new (window.AudioContext || window.webkitAudioContext)();
+                    this.createSounds();
+                    this.playBackgroundMusic();
+                }
+            }, { once: true });
+            
+            // Add audio control button
+            this.createAudioControl();
+            
+            // Add sound effects to interactive elements
+            this.attachSoundEffects();
+        },
+        
+        createSounds() {
+            // Create hover sound (soft beep)
+            this.sounds.hover = this.createTone(800, 0.05, 'sine', 0.15);
+            // Create click sound (higher pitched beep)
+            this.sounds.click = this.createTone(1200, 0.08, 'sine', 0.25);
+            // Create card hover sound
+            this.sounds.cardHover = this.createTone(600, 0.06, 'sine', 0.12);
+        },
+        
+        createTone(frequency, duration, type = 'sine', volume = 0.2) {
+            return () => {
+                if (!this.enabled || !this.context) return;
+                
+                const oscillator = this.context.createOscillator();
+                const gainNode = this.context.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(this.context.destination);
+                
+                oscillator.frequency.value = frequency;
+                oscillator.type = type;
+                
+                gainNode.gain.setValueAtTime(volume, this.context.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
+                
+                oscillator.start(this.context.currentTime);
+                oscillator.stop(this.context.currentTime + duration);
+            };
+        },
+        
+        playBackgroundMusic() {
+            if (!this.enabled || !this.context || this.bgMusic) return;
+            
+            // Create ambient background music using oscillators
+            const play = () => {
+                if (!this.enabled || !this.context) return;
+                
+                const osc1 = this.context.createOscillator();
+                const osc2 = this.context.createOscillator();
+                const gain1 = this.context.createGain();
+                const gain2 = this.context.createGain();
+                const masterGain = this.context.createGain();
+                
+                osc1.connect(gain1);
+                osc2.connect(gain2);
+                gain1.connect(masterGain);
+                gain2.connect(masterGain);
+                masterGain.connect(this.context.destination);
+                
+                // Ambient pad sound
+                osc1.frequency.value = 220; // A3
+                osc1.type = 'sine';
+                osc2.frequency.value = 330; // E4
+                osc2.type = 'sine';
+                
+                gain1.gain.value = 0.02;
+                gain2.gain.value = 0.015;
+                masterGain.gain.value = 0.3;
+                
+                osc1.start();
+                osc2.start();
+                
+                // Fade in
+                masterGain.gain.setValueAtTime(0, this.context.currentTime);
+                masterGain.gain.linearRampToValueAtTime(0.3, this.context.currentTime + 2);
+                
+                this.bgMusic = { osc1, osc2, masterGain };
+            };
+            
+            play();
+        },
+        
+        stopBackgroundMusic() {
+            if (this.bgMusic && this.context) {
+                const { osc1, osc2, masterGain } = this.bgMusic;
+                masterGain.gain.linearRampToValueAtTime(0, this.context.currentTime + 1);
+                setTimeout(() => {
+                    osc1.stop();
+                    osc2.stop();
+                    this.bgMusic = null;
+                }, 1000);
+            }
+        },
+        
+        createAudioControl() {
+            const button = document.createElement('button');
+            button.innerHTML = '<i class="fas fa-volume-up"></i>';
+            button.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: rgba(100, 181, 246, 0.2);
+                border: 2px solid rgba(100, 181, 246, 0.5);
+                color: #64b5f6;
+                font-size: 24px;
+                cursor: pointer;
+                z-index: 1000;
+                transition: all 0.3s;
+                backdrop-filter: blur(10px);
+                box-shadow: 0 5px 20px rgba(100, 181, 246, 0.3);
+            `;
+            
+            button.addEventListener('mouseenter', () => {
+                button.style.transform = 'scale(1.1)';
+                button.style.boxShadow = '0 8px 30px rgba(100, 181, 246, 0.5)';
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+                button.style.boxShadow = '0 5px 20px rgba(100, 181, 246, 0.3)';
+            });
+            
+            button.addEventListener('click', () => {
+                this.enabled = !this.enabled;
+                button.innerHTML = this.enabled ? 
+                    '<i class="fas fa-volume-up"></i>' : 
+                    '<i class="fas fa-volume-mute"></i>';
+                
+                if (this.enabled) {
+                    if (this.context) {
+                        this.playBackgroundMusic();
+                    }
+                } else {
+                    this.stopBackgroundMusic();
+                }
+            });
+            
+            document.body.appendChild(button);
+        },
+        
+        attachSoundEffects() {
+            // Add hover sounds to all links
+            document.querySelectorAll('a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    if (this.sounds.hover) this.sounds.hover();
+                });
+                link.addEventListener('click', () => {
+                    if (this.sounds.click) this.sounds.click();
+                });
+            });
+            
+            // Add sounds to skill cards
+            document.querySelectorAll('.skill-card, .project-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    if (this.sounds.cardHover) this.sounds.cardHover();
+                });
+            });
+        }
+    };
+    
+    // Initialize audio system
+    AudioSystem.init();
+    
 </body>
 </html>
