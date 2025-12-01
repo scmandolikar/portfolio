@@ -343,115 +343,217 @@
     </script>
     <script>
 
-    // ===== AUDIO SYSTEM =====
+    // ===== ENHANCED NATURAL AUDIO SYSTEM =====
     const AudioSystem = {
         context: null,
         sounds: {},
         bgMusic: null,
         enabled: true,
+        volume: 0.5,
         
         init() {
-            // Create audio context on first user interaction
             document.addEventListener('click', () => {
                 if (!this.context) {
                     this.context = new (window.AudioContext || window.webkitAudioContext)();
-                    this.createSounds();
-                    this.playBackgroundMusic();
+                    this.createNaturalSounds();
+                    this.playAmbientMusic();
                 }
             }, { once: true });
             
-            // Add audio control button
-            this.createAudioControl();
-            
-            // Add sound effects to interactive elements
+            this.createAudioControls();
             this.attachSoundEffects();
+            this.attachScrollSound();
+            this.attachTypingSound();
         },
         
-        createSounds() {
-            // Create hover sound (soft beep)
-            this.sounds.hover = this.createTone(800, 0.05, 'sine', 0.15);
-            // Create click sound (higher pitched beep)
-            this.sounds.click = this.createTone(1200, 0.08, 'sine', 0.25);
-            // Create card hover sound
-            this.sounds.cardHover = this.createTone(600, 0.06, 'sine', 0.12);
+        // Natural sound generators
+        createNaturalSounds() {
+            // Soft whoosh for hover (like gentle wind)
+            this.sounds.hover = () => this.playWhoosh(300, 0.1, 0.08);
+            
+            // Gentle pop for clicks
+            this.sounds.click = () => this.playPop(800, 0.15, 0.06);
+            
+            // Card pop-in sound
+            this.sounds.cardHover = () => this.playPop(500, 0.1, 0.08);
+            
+            // Scroll sound (soft brush)
+            this.sounds.scroll = () => this.playBrush();
+            
+            // Typing sound
+            this.sounds.type = () => this.playKeypress();
         },
         
-        createTone(frequency, duration, type = 'sine', volume = 0.2) {
-            return () => {
-                if (!this.enabled || !this.context) return;
-                
-                const oscillator = this.context.createOscillator();
-                const gainNode = this.context.createGain();
-                
-                oscillator.connect(gainNode);
-                gainNode.connect(this.context.destination);
-                
-                oscillator.frequency.value = frequency;
-                oscillator.type = type;
-                
-                gainNode.gain.setValueAtTime(volume, this.context.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
-                
-                oscillator.start(this.context.currentTime);
-                oscillator.stop(this.context.currentTime + duration);
-            };
+        // Whoosh sound (natural sweep)
+        playWhoosh(freq, vol, duration) {
+            if (!this.enabled || !this.context) return;
+            
+            const osc = this.context.createOscillator();
+            const gain = this.context.createGain();
+            const filter = this.context.createBiquadFilter();
+            
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.context.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, this.context.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(freq * 0.5, this.context.currentTime + duration);
+            
+            filter.type = 'lowpass';
+            filter.frequency.value = 2000;
+            
+            gain.gain.setValueAtTime(vol * this.volume, this.context.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
+            
+            osc.start(this.context.currentTime);
+            osc.stop(this.context.currentTime + duration);
         },
         
-        playBackgroundMusic() {
+        // Pop sound (soft bubble)
+        playPop(freq, vol, duration) {
+            if (!this.enabled || !this.context) return;
+            
+            const osc = this.context.createOscillator();
+            const gain = this.context.createGain();
+            
+            osc.connect(gain);
+            gain.connect(this.context.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, this.context.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(freq * 0.3, this.context.currentTime + duration);
+            
+            gain.gain.setValueAtTime(vol * this.volume, this.context.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
+            
+            osc.start(this.context.currentTime);
+            osc.stop(this.context.currentTime + duration);
+        },
+        
+        // Brush sound for scrolling
+        playBrush() {
+            if (!this.enabled || !this.context) return;
+            
+            const bufferSize = this.context.sampleRate * 0.05;
+            const buffer = this.context.createBuffer(1, bufferSize, this.context.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+            }
+            
+            const source = this.context.createBufferSource();
+            const gain = this.context.createGain();
+            const filter = this.context.createBiquadFilter();
+            
+            source.buffer = buffer;
+            source.connect(filter);
+            filter.connect(gain);
+            gain.connect(this.context.destination);
+            
+            filter.type = 'highpass';
+            filter.frequency.value = 1000;
+            
+            gain.gain.value = 0.04 * this.volume;
+            
+            source.start(this.context.currentTime);
+        },
+        
+        // Keypress sound for typing
+        playKeypress() {
+            if (!this.enabled || !this.context) return;
+            
+            const frequencies = [800, 850, 780, 820, 790];
+            const freq = frequencies[Math.floor(Math.random() * frequencies.length)];
+            
+            const osc = this.context.createOscillator();
+            const gain = this.context.createGain();
+            
+            osc.connect(gain);
+            gain.connect(this.context.destination);
+            
+            osc.type = 'sine';
+            osc.frequency.value = freq;
+            
+            gain.gain.setValueAtTime(0.15 * this.volume, this.context.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + 0.05);
+            
+            osc.start(this.context.currentTime);
+            osc.stop(this.context.currentTime + 0.05);
+        },
+        
+        // Ambient background music (calm and soothing)
+        playAmbientMusic() {
             if (!this.enabled || !this.context || this.bgMusic) return;
             
-            // Create ambient background music using oscillators
-            const play = () => {
-                if (!this.enabled || !this.context) return;
-                
-                const osc1 = this.context.createOscillator();
-                const osc2 = this.context.createOscillator();
-                const gain1 = this.context.createGain();
-                const gain2 = this.context.createGain();
-                const masterGain = this.context.createGain();
-                
-                osc1.connect(gain1);
-                osc2.connect(gain2);
-                gain1.connect(masterGain);
-                gain2.connect(masterGain);
-                masterGain.connect(this.context.destination);
-                
-                // Ambient pad sound
-                osc1.frequency.value = 220; // A3
-                osc1.type = 'sine';
-                osc2.frequency.value = 330; // E4
-                osc2.type = 'sine';
-                
-                gain1.gain.value = 0.02;
-                gain2.gain.value = 0.015;
-                masterGain.gain.value = 0.3;
-                
-                osc1.start();
-                osc2.start();
-                
-                // Fade in
-                masterGain.gain.setValueAtTime(0, this.context.currentTime);
-                masterGain.gain.linearRampToValueAtTime(0.3, this.context.currentTime + 2);
-                
-                this.bgMusic = { osc1, osc2, masterGain };
-            };
+            const notes = [
+                { freq: 261.63, gain: 0.015 }, // C4
+                { freq: 329.63, gain: 0.012 }, // E4
+                { freq: 392.00, gain: 0.010 }, // G4
+                { freq: 523.25, gain: 0.008 }  // C5
+            ];
             
-            play();
+            const oscillators = [];
+            const gains = [];
+            const masterGain = this.context.createGain();
+            
+            notes.forEach((note, i) => {
+                const osc = this.context.createOscillator();
+                const gain = this.context.createGain();
+                const lfo = this.context.createOscillator();
+                const lfoGain = this.context.createGain();
+                
+                lfo.frequency.value = 0.2 + (i * 0.1);
+                lfoGain.gain.value = 2;
+                
+                lfo.connect(lfoGain);
+                lfoGain.connect(osc.frequency);
+                
+                osc.type = 'sine';
+                osc.frequency.value = note.freq;
+                gain.gain.value = note.gain;
+                
+                osc.connect(gain);
+                gain.connect(masterGain);
+                
+                lfo.start();
+                osc.start();
+                
+                oscillators.push(osc);
+                gains.push(gain);
+            });
+            
+            masterGain.connect(this.context.destination);
+            masterGain.gain.setValueAtTime(0, this.context.currentTime);
+            masterGain.gain.linearRampToValueAtTime(this.volume, this.context.currentTime + 3);
+            
+            this.bgMusic = { oscillators, masterGain };
         },
         
-        stopBackgroundMusic() {
+        stopAmbientMusic() {
             if (this.bgMusic && this.context) {
-                const { osc1, osc2, masterGain } = this.bgMusic;
+                const { oscillators, masterGain } = this.bgMusic;
                 masterGain.gain.linearRampToValueAtTime(0, this.context.currentTime + 1);
                 setTimeout(() => {
-                    osc1.stop();
-                    osc2.stop();
+                    oscillators.forEach(osc => osc.stop());
                     this.bgMusic = null;
                 }, 1000);
             }
         },
         
-        createAudioControl() {
+        updateVolume(newVolume) {
+            this.volume = newVolume;
+            if (this.bgMusic && this.bgMusic.masterGain) {
+                this.bgMusic.masterGain.gain.linearRampToValueAtTime(
+                    newVolume, 
+                    this.context.currentTime + 0.1
+                );
+            }
+        },
+        
+        createAudioControls() {
+            // Main audio button
             const button = document.createElement('button');
             button.innerHTML = '🔊';
             button.style.cssText = `
@@ -466,7 +568,7 @@
                 color: #64b5f6;
                 font-size: 24px;
                 cursor: pointer;
-                z-index: 1000;
+                z-index: 1001;
                 transition: all 0.3s;
                 backdrop-filter: blur(10px);
                 box-shadow: 0 5px 20px rgba(100, 181, 246, 0.3);
@@ -484,24 +586,64 @@
             
             button.addEventListener('click', () => {
                 this.enabled = !this.enabled;
-                button.innerHTML = this.enabled ? 
-                    '🔊' : 
-                    '🔇';
+                button.innerHTML = this.enabled ? '🔊' : '🔇';
                 
                 if (this.enabled) {
-                    if (this.context) {
-                        this.playBackgroundMusic();
-                    }
+                    if (this.context) this.playAmbientMusic();
                 } else {
-                    this.stopBackgroundMusic();
+                    this.stopAmbientMusic();
                 }
             });
             
             document.body.appendChild(button);
+            
+            // Volume slider
+            const volumeContainer = document.createElement('div');
+            volumeContainer.style.cssText = `
+                position: fixed;
+                bottom: 100px;
+                right: 30px;
+                width: 60px;
+                height: 150px;
+                background: rgba(15, 52, 96, 0.3);
+                backdrop-filter: blur(10px);
+                border-radius: 30px;
+                border: 1px solid rgba(100, 181, 246, 0.3);
+                padding: 15px 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                z-index: 1000;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            `;
+            
+            const slider = document.createElement('input');
+            slider.type = 'range';
+            slider.min = '0';
+            slider.max = '100';
+            slider.value = '50';
+            slider.orient = 'vertical';
+            slider.style.cssText = `
+                writing-mode: bt-lr;
+                -webkit-appearance: slider-vertical;
+                width: 120px;
+                height: 8px;
+                transform: rotate(-90deg);
+                background: rgba(100, 181, 246, 0.2);
+                border-radius: 5px;
+                outline: none;
+            `;
+            
+            slider.addEventListener('input', (e) => {
+                this.updateVolume(e.target.value / 100);
+            });
+            
+            volumeContainer.appendChild(slider);
+            document.body.appendChild(volumeContainer);
         },
         
         attachSoundEffects() {
-            // Add hover sounds to all links
+            // Hover sounds for links
             document.querySelectorAll('a').forEach(link => {
                 link.addEventListener('mouseenter', () => {
                     if (this.sounds.hover) this.sounds.hover();
@@ -511,18 +653,38 @@
                 });
             });
             
-            // Add sounds to skill cards
+            // Card hover sounds
             document.querySelectorAll('.skill-card, .project-card').forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     if (this.sounds.cardHover) this.sounds.cardHover();
                 });
             });
+        },
+        
+        attachScrollSound() {
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                if (this.sounds.scroll) this.sounds.scroll();
+                scrollTimeout = setTimeout(() => {}, 100);
+            }, { passive: true });
+        },
+        
+        attachTypingSound() {
+            // Add typing sound to the typed.js animation
+            const typedElement = document.getElementById('typed');
+            if (typedElement) {
+                const observer = new MutationObserver(() => {
+                    if (this.sounds.type && Math.random() > 0.3) {
+                        this.sounds.type();
+                    }
+                });
+                observer.observe(typedElement, { characterData: true, subtree: true, childList: true });
+            }
         }
     };
     
     // Initialize audio system
-    AudioSystem.init();
-    </script>
-    
+    AudioSystem.init();    
 </body>
 </html>
