@@ -1,690 +1,145 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakshath Mandolikar | IT Student & Python Developer</title>
-    
-    <!-- External CSS Libraries -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            overflow-x: hidden;
-            background: #0a0a0a;
-        }
-        
-        /* Animated Background - Faster */
-        #animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            animation: gradientShift 8s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-            50% { background: linear-gradient(135deg, #0f3460 0%, #16213e 50%, #1a1a2e 100%); }
-        }
-        
-        /* Particles Canvas */
-        #particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
-        header {
-            background: rgba(15, 52, 96, 0.2);
-            backdrop-filter: blur(10px);
-            padding: 3rem 2rem;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            margin: 2rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: fadeInDown 0.6s ease;
-        }
-        
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        h1 {
-            color: #fff;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .subtitle {
-            color: #4fc3f7;
-            font-size: 1.5rem;
-            margin: 1rem auto;
-            max-width: 800px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
-        .typing-effect {
-            color: #64b5f6;
-            font-weight: bold;
-        }
-        
-        p {
-            color: #b0b0b0;
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 1.5rem auto;
-        }
-        
-        .contact-info {
-            margin-top: 2rem;
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .contact-info a {
-            color: #64b5f6;
-            text-decoration: none;
-            padding: 0.8rem 1.5rem;
-            background: rgba(100, 181, 246, 0.1);
-            border: 1px solid rgba(100, 181, 246, 0.3);
-            border-radius: 50px;
-            transition: all 0.2s;
-            font-size: 1rem;
-        }
-        
-        .contact-info a:hover {
-            background: rgba(100, 181, 246, 0.2);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(100, 181, 246, 0.3);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        
-        section {
-            background: rgba(22, 33, 62, 0.3);
-            backdrop-filter: blur(10px);
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        h2 {
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        h2 i {
-            color: #64b5f6;
-            margin-right: 1rem;
-        }
-        
-        h3 {
-            color: #fff;
-            font-size: 1.5rem;
-            margin: 1rem 0;
-        }
-        
-        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.8rem}
-        .skill-card{background:rgba(15,52,96,0.4);padding:2rem;border-radius:15px;border:1px solid rgba(100,181,246,0.2);transition:all 0.2s;cursor:pointer}
-        .skill-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 20px 50px rgba(100,181,246,0.3);border-color:rgba(100,181,246,0.5)}
-        .skill-card i{font-size:3rem;color:#64b5f6;margin-bottom:1rem}
-        .skill-card h3{color:#fff;font-size:1.5rem;margin:1rem 0}
-        .skill-card p{color:#b0b0b0;font-size:1rem}
-        .progress-bar{height:8px;background:rgba(255,255,255,0.1);border-radius:10px;margin-top:1rem;overflow:hidden}
-        .progress-fill{height:100%;background:linear-gradient(90deg,#64b5f6,#42a5f5);animation:fillBar 1.5s ease-in-out;transform-origin:left}
-        @keyframes fillBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-        
-        .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
-        .project-card{background:rgba(15,52,96,0.4);border-radius:15px;overflow:hidden;border:1px solid rgba(100,181,246,0.2);transition:all 0.2s;cursor:pointer;text-decoration:none;color:inherit;display:block}
-        .project-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 20px 60px rgba(100,181,246,0.4);border-color:rgba(100,181,246,0.6)}
-        .project-img{width:100%;height:200px;object-fit:cover;transition:transform 0.2s;display:block}
-        .project-card:hover .project-img{transform:scale(1.1)}
-        .project-tag{display:inline-block;background:rgba(100,181,246,0.2);color:#64b5f6;padding:0.5rem 1rem;border-radius:20px;font-size:0.85rem;margin:1rem 1.5rem 0.5rem;font-weight:bold}
-        .project-card h3{color:#fff;font-size:1.6rem;margin:0.5rem 1.5rem}
-        .project-card p{color:#b0b0b0;padding:0.5rem 1.5rem;margin:0.5rem 0;font-size:1rem}
-        .tech-stack{margin-top:1rem;color:#90caf9;font-style:italic;padding:0 1.5rem 1rem}
-        
-        .education-item{margin:2rem 0}
-        .expertise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
-        .expertise-item h4{color:#64b5f6;margin-bottom:0.5rem;font-size:1.2rem}
-        .expertise-item h4 i{margin-right:0.5rem}
-        .expertise-item p{color:#b0b0b0;font-size:1rem}
-        footer{background:rgba(15,52,96,0.3);backdrop-filter:blur(10px);padding:2.5rem;text-align:center;border-radius:20px;margin:2rem;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
-        footer h2{font-size:2rem;margin-bottom:1rem}
-        footer p{font-size:1.1rem;margin-bottom:2rem}
-        @media(max-width:768px){h1{font-size:2rem}h2{font-size:1.8rem}.subtitle{font-size:1.2rem}header{padding:2rem 1rem}section{padding:2rem 1rem}}
-    </style>
-</head>
-<body>
-    <div id="animated-bg"></div>
-    <canvas id="particles"></canvas>
-    
-    <header data-aos="fade-down">
-        <h1>Sakshath Mandolikar</h1>
-        <p class="subtitle"><span id="typed" class="typing-effect"></span></p>
-        <p>Third Year B.Sc. IT student seeking opportunities for real-world industry experience. Skilled in Python development, software testing, and data analytics through academic projects and coursework.</p>
-        <div class="contact-info" data-aos="zoom-in" data-aos-delay="50">
-            <a href="mailto:scmandolikar@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-            <a href="tel:+918600077226"><i class="fas fa-phone"></i> +91 8600077226</a>
-            <a href="https://github.com/scmandolikar" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/sakshath-mandolikar-8432b8396" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        </div>
-    </header>
-    
-    <div class="container">
-        <section data-aos="fade-up">
-            <h2><i class="fas fa-user"></i> About Me</h2>
-            <p>I'm a dedicated Third Year B.Sc. Information Technology student currently in my final semester, seeking opportunities for real-world industry experience or my first job opportunity. Through my coursework and academic projects, I've developed practical skills in Python programming, software testing methodologies, and data analytics.</p>
-            <p><strong>Currently Learning:</strong> Data Envelopment Analysis (DEA), Intrusion Detection Systems using CNNs, Business Intelligence tools, and Advanced Software Testing techniques</p>
-        </section>
-        
-        <section data-aos="fade-up" data-aos-delay="50">
-            <h2><i class="fas fa-code"></i> Skills from Coursework</h2>
-            <div class="skills-grid">
-                <div class="skill-card" data-aos="flip-left">
-                    <i class="fas fa-flask"></i>
-                    <h3>🧪 Software Testing</h3>
-                    <p>Test strategies, manual testing, basic automation concepts, and quality assurance principles learned through coursework</p>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="50">
-                    <i class="fab fa-python"></i>
-                    <h3>🐍 Python Development</h3>
-                    <p>Flask basics, GUI development with CustomTkinter, file handling, and automation scripts through academic projects</p>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-                <div class="skill-card" data-aos="flip-left" data-aos-delay="100">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>📊 Data Analytics</h3>
-                    <p>Basic data analysis, working with datasets, visualization concepts, and introduction to machine learning models</p>
-                    <div class="progress-bar"><div class="progress-fill"></div></div>
-                </div>
-            </div>
-        </section>
-        
-        <section data-aos="fade-up" data-aos-delay="100">
-            <h2><i class="fas fa-laptop-code"></i> Academic Projects</h2>
-            <div class="projects-grid">
-                <a href="https://github.com/scmandolikar/secure-collab-drive" target="_blank" class="project-card" data-aos="zoom-in">
-                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a2e" width="400" height="200"/><path d="M150 60 L200 40 L250 60 L250 120 L200 140 L150 120 Z" fill="#64b5f6" opacity="0.3"/><circle cx="200" cy="90" r="25" fill="#64b5f6" opacity="0.5"/><path d="M200 75 L200 105 M185 90 L215 90" stroke="#fff" stroke-width="3"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Secure File Sharing</text></svg>
-                    <span class="project-tag">PYTHON DEVELOPMENT</span>
-                    <h3>Secure Collab Drive</h3>
-                    <p>Academic project: AES-encrypted file-sharing platform built with Python/Flask for secure collaboration</p>
-                    <p class="tech-stack"><strong>Tech Stack:</strong> Python, Flask, AES Encryption, SQLite</p>
-                </a>
-                
-                <a href="https://github.com/scmandolikar/FileWrangler" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="50">
-                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#16213e" width="400" height="200"/><rect x="100" y="50" width="80" height="100" rx="5" fill="#64b5f6" opacity="0.3"/><rect x="220" y="50" width="80" height="100" rx="5" fill="#64b5f6" opacity="0.5"/><path d="M180 100 L220 100 M210 90 L220 100 L210 110" stroke="#64b5f6" stroke-width="3" fill="none"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">File Management</text></svg>
-                    <span class="project-tag">AUTOMATION TOOL</span>
-                    <h3>FileWrangler</h3>
-                    <p>Course project: Desktop application with CustomTkinter UI for file organization and bulk operations</p>
-                    <p class="tech-stack"><strong>Tech Stack:</strong> Python, CustomTkinter, File System APIs</p>
-                </a>
-                
-                <a href="https://github.com/scmandolikar/CodeSnap" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="100">
-                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#0f3460" width="400" height="200"/><rect x="80" y="50" width="240" height="100" rx="5" fill="#64b5f6" opacity="0.2"/><text x="100" y="80" fill="#64b5f6" font-family="monospace" font-size="14">function code() {</text><text x="120" y="100" fill="#90caf9" font-family="monospace" font-size="14">return "Hello";</text><text x="100" y="120" fill="#64b5f6" font-family="monospace" font-size="14">}</text><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Code Generator</text></svg>
-                    <span class="project-tag">DEVELOPMENT TOOL</span>
-                    <h3>Social Code Generator</h3>
-                    <p>Learning project: Code snippet generator for creating shareable code presentations</p>
-                    <p class="tech-stack"><strong>Tech Stack:</strong> Python, Image Processing, Syntax Highlighting</p>
-                </a>
-                
-                <a href="https://github.com/scmandolikar/HandSignConverter" target="_blank" class="project-card" data-aos="zoom-in" data-aos-delay="150">
-                    <svg class="project-img" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><rect fill="#1a1a2e" width="400" height="200"/><path d="M150 120 L150 140 L160 145 L170 140 L170 110" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M170 105 L170 80" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 110 L190 90" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 125 L190 130" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><path d="M175 140 L185 145" stroke="#64b5f6" stroke-width="4" fill="none" opacity="0.7"/><circle cx="250" cy="100" r="40" fill="none" stroke="#64b5f6" stroke-width="2" opacity="0.5"/><text x="200" y="170" text-anchor="middle" fill="#64b5f6" font-size="18" font-family="Arial">Hand Sign Recognition</text></svg>
-                    <span class="project-tag">MACHINE LEARNING</span>
-                    <h3>Hand Sign to Text Converter</h3>
-                    <p>Academic ML project: Real-time hand sign recognition using Python, OpenCV, and MediaPipe</p>
-                    <p class="tech-stack"><strong>Tech Stack:</strong> Python, OpenCV, MediaPipe, Scikit-learn</p>
-                </a>
-            </div>
-        </section>
-        
-        <section data-aos="fade-up">
-            <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-            
-            <div class="education-item">
-                <h3>B.Sc. Information Technology (TY BSCIT)</h3>
-                <p><strong>Third Year, Semester VI</strong> | Currently Pursuing (Final Semester)</p>
-                <p>Relevant Coursework: Software Testing, Data Envelopment Analysis, Business Intelligence, Algorithm Design, Database Management, Web Development, Python Programming</p>
-            </div>
-            
-            <div class="education-item">
-                <h3>Higher Secondary Certificate (HSC) - Class 12</h3>
-                <p><strong>Science Stream</strong> | Completed</p>
-                <p>Foundation in Physics, Chemistry, Mathematics, and Computer Science</p>
-            </div>
-            
-            <div class="education-item">
-                <h3>Secondary School Certificate (SSC) - Class 10</h3>
-                <p><strong>General Studies</strong> | Completed</p>
-                <p>Core subjects including Mathematics, Science, and English</p>
-            </div>
-        </section>
-        
-        <section data-aos="fade-up">
-            <h2><i class="fas fa-tools"></i> Technical Knowledge</h2>
-            <div class="expertise-grid">
-                <div class="expertise-item">
-                    <h4><i class="fas fa-laptop-code"></i> Programming</h4>
-                    <p>Python, SQL, HTML/CSS, JavaScript</p>
-                </div>
-                <div class="expertise-item">
-                    <h4><i class="fas fa-layer-group"></i> Frameworks</h4>
-                    <p>Flask, CustomTkinter, TensorFlow (basics)</p>
-                </div>
-                <div class="expertise-item">
-                    <h4><i class="fas fa-toolbox"></i> Tools</h4>
-                    <p>Git/GitHub, VS Code, Google Workspace</p>
-                </div>
-                <div class="expertise-item">
-                    <h4><i class="fas fa-book"></i> Learning Focus</h4>
-                    <p>Software Testing, Data Analytics, Web Development</p>
-                </div>
-            </div>
-        </section>
-    </div>
-    
-    <footer data-aos="fade-up">
-        <h2><i class="fas fa-handshake"></i> Let's Connect</h2>
-        <p>I'm actively seeking opportunities for real-world industry experience. Open to discussing projects, learning opportunities, and career guidance.</p>
-        <div class="contact-info">
-            <a href="mailto:scmandolikar@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-            <a href="https://github.com/scmandolikar" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            <a href="https://www.linkedin.com/in/sakshath-mandolikar-8432b8396" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-        </div>
-        <p style="margin-top:2rem;color:#90caf9">&copy; 2025 Sakshath Mandolikar. Final Year IT Student.</p>
-    </footer>
-    
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <script>
-        AOS.init({duration:600,once:false,mirror:true});
-        new Typed('#typed',{strings:['Python Developer','Aspiring Software Tester','Data Analytics Learner'],typeSpeed:40,backSpeed:25,loop:true,showCursor:true,cursorChar:'|'});
-        const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-        const particles=[],particleCount=50;
-        class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.vx=(Math.random()-0.5)*0.5;this.vy=(Math.random()-0.5)*0.5;this.radius=Math.random()*2+1}
-        update(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>canvas.width)this.vx*=-1;if(this.y<0||this.y>canvas.height)this.vy*=-1}
-        draw(){ctx.fillStyle='rgba(100,181,246,0.3)';ctx.beginPath();ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);ctx.fill()}}
-        for(let i=0;i<particleCount;i++)particles.push(new Particle());
-        function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw()});requestAnimationFrame(animate)}
-        animate();
-        window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight});
-    </script>
-    <script>
+<!-- ONLY SHOWING EDITED PARTS YOU NEED TO REPLACE -->
 
-    // ===== ENHANCED NATURAL AUDIO SYSTEM =====
-    const AudioSystem = {
-        context: null,
-        sounds: {},
-        bgMusic: null,
-        enabled: true,
-        volume: 0.5,
-        
-        init() {
-            document.addEventListener('click', () => {
-                if (!this.context) {
-                    this.context = new (window.AudioContext || window.webkitAudioContext)();
-                    this.createNaturalSounds();
-                    this.playAmbientMusic();
-                }
-            }, { once: true });
-            
-            this.createAudioControls();
-            this.attachSoundEffects();
-            this.attachScrollSound();
-            this.attachTypingSound();
-        },
-        
-        // Natural sound generators
-        createNaturalSounds() {
-            // Soft whoosh for hover (like gentle wind)
-            this.sounds.hover = () => this.playWhoosh(300, 0.1, 0.08);
-            
-            // Gentle pop for clicks
-            this.sounds.click = () => this.playPop(800, 0.15, 0.06);
-            
-            // Card pop-in sound
-            this.sounds.cardHover = () => this.playPop(500, 0.1, 0.08);
-            
-            // Scroll sound (soft brush)
-            this.sounds.scroll = () => this.playBrush();
-            
-            // Typing sound
-            this.sounds.type = () => this.playKeypress();
-        },
-        
-        // Whoosh sound (natural sweep)
-        playWhoosh(freq, vol, duration) {
-            if (!this.enabled || !this.context) return;
-            
-            const osc = this.context.createOscillator();
-            const gain = this.context.createGain();
-            const filter = this.context.createBiquadFilter();
-            
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.context.destination);
-            
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, this.context.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(freq * 0.5, this.context.currentTime + duration);
-            
-            filter.type = 'lowpass';
-            filter.frequency.value = 2000;
-            
-            gain.gain.setValueAtTime(vol * this.volume, this.context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
-            
-            osc.start(this.context.currentTime);
-            osc.stop(this.context.currentTime + duration);
-        },
-        
-        // Pop sound (soft bubble)
-        playPop(freq, vol, duration) {
-            if (!this.enabled || !this.context) return;
-            
-            const osc = this.context.createOscillator();
-            const gain = this.context.createGain();
-            
-            osc.connect(gain);
-            gain.connect(this.context.destination);
-            
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(freq, this.context.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(freq * 0.3, this.context.currentTime + duration);
-            
-            gain.gain.setValueAtTime(vol * this.volume, this.context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + duration);
-            
-            osc.start(this.context.currentTime);
-            osc.stop(this.context.currentTime + duration);
-        },
-        
-        // Brush sound for scrolling
-        playBrush() {
-            if (!this.enabled || !this.context) return;
-            
-            const bufferSize = this.context.sampleRate * 0.05;
-            const buffer = this.context.createBuffer(1, bufferSize, this.context.sampleRate);
-            const data = buffer.getChannelData(0);
-            
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
-            }
-            
-            const source = this.context.createBufferSource();
-            const gain = this.context.createGain();
-            const filter = this.context.createBiquadFilter();
-            
-            source.buffer = buffer;
-            source.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.context.destination);
-            
-            filter.type = 'highpass';
-            filter.frequency.value = 1000;
-            
-            gain.gain.value = 0.04 * this.volume;
-            
-            source.start(this.context.currentTime);
-        },
-        
-        // Keypress sound for typing
-        playKeypress() {
-            if (!this.enabled || !this.context) return;
-            
-            const frequencies = [800, 850, 780, 820, 790];
-            const freq = frequencies[Math.floor(Math.random() * frequencies.length)];
-            
-            const osc = this.context.createOscillator();
-            const gain = this.context.createGain();
-            
-            osc.connect(gain);
-            gain.connect(this.context.destination);
-            
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            
-            gain.gain.setValueAtTime(0.15 * this.volume, this.context.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + 0.05);
-            
-            osc.start(this.context.currentTime);
-            osc.stop(this.context.currentTime + 0.05);
-        },
-        
-        // Ambient background music (calm and soothing)
-        playAmbientMusic() {
-            if (!this.enabled || !this.context || this.bgMusic) return;
-            
-            const notes = [
-                { freq: 261.63, gain: 0.015 }, // C4
-                { freq: 329.63, gain: 0.012 }, // E4
-                { freq: 392.00, gain: 0.010 }, // G4
-                { freq: 523.25, gain: 0.008 }  // C5
-            ];
-            
-            const oscillators = [];
-            const gains = [];
-            const masterGain = this.context.createGain();
-            
-            notes.forEach((note, i) => {
-                const osc = this.context.createOscillator();
-                const gain = this.context.createGain();
-                const lfo = this.context.createOscillator();
-                const lfoGain = this.context.createGain();
-                
-                lfo.frequency.value = 0.2 + (i * 0.1);
-                lfoGain.gain.value = 2;
-                
-                lfo.connect(lfoGain);
-                lfoGain.connect(osc.frequency);
-                
-                osc.type = 'sine';
-                osc.frequency.value = note.freq;
-                gain.gain.value = note.gain;
-                
-                osc.connect(gain);
-                gain.connect(masterGain);
-                
-                lfo.start();
-                osc.start();
-                
-                oscillators.push(osc);
-                gains.push(gain);
-            });
-            
-            masterGain.connect(this.context.destination);
-            masterGain.gain.setValueAtTime(0, this.context.currentTime);
-            masterGain.gain.linearRampToValueAtTime(this.volume, this.context.currentTime + 3);
-            
-            this.bgMusic = { oscillators, masterGain };
-        },
-        
-        stopAmbientMusic() {
-            if (this.bgMusic && this.context) {
-                const { oscillators, masterGain } = this.bgMusic;
-                masterGain.gain.linearRampToValueAtTime(0, this.context.currentTime + 1);
-                setTimeout(() => {
-                    oscillators.forEach(osc => osc.stop());
-                    this.bgMusic = null;
-                }, 1000);
-            }
-        },
-        
-        updateVolume(newVolume) {
-            this.volume = newVolume;
-            if (this.bgMusic && this.bgMusic.masterGain) {
-                this.bgMusic.masterGain.gain.linearRampToValueAtTime(
-                    newVolume, 
-                    this.context.currentTime + 0.1
-                );
-            }
-        },
-        
-        createAudioControls() {
-            // Main audio button
-            const button = document.createElement('button');
-            button.innerHTML = '🔊';
-            button.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                right: 30px;
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
-                background: rgba(100, 181, 246, 0.2);
-                border: 2px solid rgba(100, 181, 246, 0.5);
-                color: #64b5f6;
-                font-size: 24px;
-                cursor: pointer;
-                z-index: 1001;
-                transition: all 0.3s;
-                backdrop-filter: blur(10px);
-                box-shadow: 0 5px 20px rgba(100, 181, 246, 0.3);
-            `;
-            
-            button.addEventListener('mouseenter', () => {
-                button.style.transform = 'scale(1.1)';
-                button.style.boxShadow = '0 8px 30px rgba(100, 181, 246, 0.5)';
-            });
-            
-            button.addEventListener('mouseleave', () => {
-                button.style.transform = 'scale(1)';
-                button.style.boxShadow = '0 5px 20px rgba(100, 181, 246, 0.3)';
-            });
-            
-            button.addEventListener('click', () => {
-                this.enabled = !this.enabled;
-                button.innerHTML = this.enabled ? '🔊' : '🔇';
-                
-                if (this.enabled) {
-                    if (this.context) this.playAmbientMusic();
-                } else {
-                    this.stopAmbientMusic();
-                }
-            });
-            
-            document.body.appendChild(button);
-            
-            // Volume slider
-            const volumeContainer = document.createElement('div');
-            volumeContainer.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                right: 30px;
-                width: 60px;
-                height: 150px;
-                background: rgba(15, 52, 96, 0.3);
-                backdrop-filter: blur(10px);
-                border-radius: 30px;
-                border: 1px solid rgba(100, 181, 246, 0.3);
-                padding: 15px 0;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                z-index: 1000;
-                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            `;
-            
-            const slider = document.createElement('input');
-            slider.type = 'range';
-            slider.min = '0';
-            slider.max = '100';
-            slider.value = '50';
-            slider.orient = 'vertical';
-            slider.style.cssText = `
-                writing-mode: bt-lr;
-                -webkit-appearance: slider-vertical;
-                width: 120px;
-                height: 8px;
-                transform: rotate(-90deg);
-                background: rgba(100, 181, 246, 0.2);
-                border-radius: 5px;
-                outline: none;
-            `;
-            
-            slider.addEventListener('input', (e) => {
-                this.updateVolume(e.target.value / 100);
-            });
-            
-            volumeContainer.appendChild(slider);
-            document.body.appendChild(volumeContainer);
-        },
-        
-        attachSoundEffects() {
-            // Hover sounds for links
-            document.querySelectorAll('a').forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    if (this.sounds.hover) this.sounds.hover();
-                });
-                link.addEventListener('click', () => {
-                    if (this.sounds.click) this.sounds.click();
-                });
-            });
-            
-            // Card hover sounds
-            document.querySelectorAll('.skill-card, .project-card').forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    if (this.sounds.cardHover) this.sounds.cardHover();
-                });
-            });
-        },
-        
-        attachScrollSound() {
-            let scrollTimeout;
-            window.addEventListener('scroll', () => {
-                clearTimeout(scrollTimeout);
-                if (this.sounds.scroll) this.sounds.scroll();
-                scrollTimeout = setTimeout(() => {}, 100);
-            }, { passive: true });
-        },
-        
-        attachTypingSound() {
-            // Add typing sound to the typed.js animation
-            const typedElement = document.getElementById('typed');
-            if (typedElement) {
-                const observer = new MutationObserver(() => {
-                    if (this.sounds.type && Math.random() > 0.3) {
-                        this.sounds.type();
-                    }
-                });
-                observer.observe(typedElement, { characterData: true, subtree: true, childList: true });
-            }
-        }
-    };
+<!-- ================= HEADER ================= -->
+<p class="subtitle"><span id="typed" class="typing-effect"></span></p>
+<p>
+B.Sc. Information Technology Graduate seeking entry-level opportunities as a Customer Success Associate. 
+Skilled in communication, problem-solving, and Python-based solutions with hands-on project experience in software development and data analytics.
+</p>
+
+<!-- ================= ABOUT ME ================= -->
+<section data-aos="fade-up">
+    <h2><i class="fas fa-user"></i> About Me</h2>
     
-    // Initialize audio system
-    AudioSystem.init();    
-</body>
-</html>
+    <p>
+        I'm a B.Sc. Information Technology graduate with a strong academic background and practical project experience. 
+        I am particularly interested in Customer Success and client-facing roles where I can combine my technical understanding 
+        with communication and problem-solving skills to deliver value to customers.
+    </p>
+
+    <p>
+        I have worked on multiple academic projects that required understanding user needs, building solutions, and ensuring usability — 
+        giving me a strong foundation for customer interaction, support, and relationship management.
+    </p>
+
+    <p>
+        <strong>Academic Performance:</strong><br>
+        Final Semester CGPA: <strong>9.4</strong><br>
+        Overall CGPA: <strong>8.13</strong>
+    </p>
+
+    <p>
+        <strong>Key Strengths:</strong> Communication, Adaptability, Problem-Solving, Customer Understanding, Technical Support Mindset
+    </p>
+</section>
+
+<!-- ================= SKILLS SECTION TITLE CHANGE ================= -->
+<h2><i class="fas fa-code"></i> Skills & Expertise</h2>
+
+<!-- UPDATE SKILL DESCRIPTIONS -->
+<div class="skill-card">
+    <i class="fas fa-flask"></i>
+    <h3>🧪 Software Testing</h3>
+    <p>Understanding of QA processes, identifying issues, and ensuring smooth user experience — important for customer satisfaction</p>
+</div>
+
+<div class="skill-card">
+    <i class="fab fa-python"></i>
+    <h3>🐍 Python Development</h3>
+    <p>Ability to build and understand backend systems, helping in troubleshooting and explaining technical issues to clients</p>
+</div>
+
+<div class="skill-card">
+    <i class="fas fa-chart-line"></i>
+    <h3>📊 Data Analytics</h3>
+    <p>Basic data interpretation and insights generation to support decision-making and improve customer outcomes</p>
+</div>
+
+<!-- ================= PROJECT DESCRIPTION TONE CHANGE ================= -->
+<p>Developed a secure file-sharing platform focusing on usability and user data protection</p>
+
+<p>Built a desktop tool to simplify file management and improve user efficiency</p>
+
+<p>Created a tool for generating clean and shareable code visuals for better communication</p>
+
+<p>Worked on real-time ML-based solution improving interaction between system and users</p>
+
+<!-- ================= EDUCATION ================= -->
+<section data-aos="fade-up">
+    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+    
+    <div class="education-item">
+        <h3>B.Sc. Information Technology</h3>
+        <p><strong>Status:</strong> Completed</p>
+        <p><strong>Final Semester CGPA:</strong> 9.4</p>
+        <p><strong>Overall CGPA:</strong> 8.13</p>
+        <p>
+            Relevant Coursework: Software Testing, Business Intelligence, Database Management, Web Development, Python Programming
+        </p>
+    </div>
+
+    <div class="education-item">
+        <h3>Higher Secondary Certificate (HSC)</h3>
+        <p><strong>Science Stream</strong> | Completed</p>
+    </div>
+
+    <div class="education-item">
+        <h3>Secondary School Certificate (SSC)</h3>
+        <p><strong>Completed</strong></p>
+    </div>
+</section>
+
+<!-- ================= TECHNICAL KNOWLEDGE ================= -->
+<section data-aos="fade-up">
+    <h2><i class="fas fa-tools"></i> Technical & Professional Skills</h2>
+    <div class="expertise-grid">
+        
+        <div class="expertise-item">
+            <h4><i class="fas fa-comments"></i> Communication</h4>
+            <p>Clear verbal and written communication, explaining technical concepts in simple terms</p>
+        </div>
+
+        <div class="expertise-item">
+            <h4><i class="fas fa-users"></i> Customer Focus</h4>
+            <p>Understanding user needs, problem-solving, and delivering smooth user experience</p>
+        </div>
+
+        <div class="expertise-item">
+            <h4><i class="fas fa-laptop-code"></i> Technical Skills</h4>
+            <p>Python, SQL, HTML/CSS, JavaScript</p>
+        </div>
+
+        <div class="expertise-item">
+            <h4><i class="fas fa-toolbox"></i> Tools</h4>
+            <p>Git/GitHub, VS Code, Google Workspace</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer data-aos="fade-up">
+    <h2><i class="fas fa-handshake"></i> Let's Connect</h2>
+    <p>
+        I'm actively seeking entry-level opportunities as a Customer Success Associate. 
+        Open to roles in client handling, SaaS support, and business-facing tech positions.
+    </p>
+
+    <p style="margin-top:2rem;color:#90caf9">
+        &copy; 2026 Sakshath Mandolikar. B.Sc. IT Graduate.
+    </p>
+</footer>
+
+<!-- ================= TYPING EFFECT UPDATE ================= -->
+<script>
+new Typed('#typed',{
+    strings:[
+        'Customer Success Associate Aspirant',
+        'Tech + Communication Focused',
+        'Problem Solver & Client-Oriented'
+    ],
+    typeSpeed:40,
+    backSpeed:25,
+    loop:true
+});
+</script>
